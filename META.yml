@@ -1,0 +1,32 @@
+---
+abstract: 'command-line control of test class execution'
+author:
+  - 'Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+  Test::More: 0.70
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.91'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-Class-GetoptControl
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Getopt::Inherited: 0
+  List::Util: 0
+  Test::Class: 0
+  perl: 5.8.0
+resources:
+  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Test-Class-GetoptControl
+  homepage: http://search.cpan.org/dist/Test-Class-GetoptControl/
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/hanekomu/test-class-getoptcontrol.git
+version: 0.01
