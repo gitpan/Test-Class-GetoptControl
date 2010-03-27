@@ -1,18 +1,20 @@
-package Test::Class::GetoptControl;
 use 5.008;
 use strict;
 use warnings;
+
+package Test::Class::GetoptControl;
+our $VERSION = '1.100860';
+# ABSTRACT: Command-line control of test class execution
 use List::Util 'shuffle';
 use Test::More;
 use Test::Class;
-our $VERSION = '0.01';
-use base 'Getopt::Inherited';
+use parent 'Getopt::Inherited';
 use constant GETOPT => qw(
   include|i=s@ shuffle reverse
 );
 
 sub runtests {
-    my $self = shift;
+    my $self    = shift;
     my @classes = $self->get_classes;
     if (@classes) {
         Test::Class->runtests(@classes);
@@ -56,15 +58,23 @@ sub get_classes {
     @classes;
 }
 1;
-__END__
 
-=for test_synopsis
-1;
+
+__END__
+=pod
+
+=for stopwords GETOPT runtests
+
+=for test_synopsis 1;
 __END__
 
 =head1 NAME
 
-Test::Class::GetoptControl - command-line control of test class execution
+Test::Class::GetoptControl - Command-line control of test class execution
+
+=head1 VERSION
+
+version 1.100860
 
 =head1 SYNOPSIS
 
@@ -85,6 +95,23 @@ on the command-line:
 
 When inheriting from this class, your application gets the ability to control
 the execution of test classes using command-line options.
+
+=head1 METHODS
+
+=head2 runtests
+
+Calls C<get_classes()> to determine which test classes to run and in which
+order, then runs them.
+
+=head2 get_classes
+
+Asks L<Test::Class> for information on all registered test classes, then
+filters and sorts them by the criteria set in the command-line options.
+
+=head2 GETOPT
+
+Defines the specific command-line options for this class; see
+L<Getopt::Inherited>.
 
 =head1 COMMAND-LINE OPTIONS
 
@@ -119,58 +146,39 @@ In any case, a note specifying the sort order is printed.
 
 =back
 
-=head1 METHODS
+=head1 INSTALLATION
 
-=over 4
-
-=item C<runtests>
-
-Calls C<get_classes()> to determine which test classes to run and in which
-order, then runs them.
-
-=item C<get_classes>
-
-Asks L<Test::Class> for information on all registered test classes, then
-filters and sorts them by the criteria set in the command-line options.
-
-=item C<GETOPT>
-
-Defines the specific command-line options for this class; see
-L<Getopt::Inherited>.
-
-=back
+See perlmodinstall for information and options on installing Perl modules.
 
 =head1 BUGS AND LIMITATIONS
 
 No bugs have been reported.
 
 Please report any bugs or feature requests through the web interface at
-L<http://rt.cpan.org>.
-
-=head1 INSTALLATION
-
-See perlmodinstall for information and options on installing Perl modules.
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=Test-Class-GetoptControl>.
 
 =head1 AVAILABILITY
 
 The latest version of this module is available from the Comprehensive Perl
-Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN site
-near you. Or see L<http://search.cpan.org/dist/Test-Class-GetoptControl/>.
+Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
+site near you, or see
+L<http://search.cpan.org/dist/Test-Class-GetoptControl/>.
 
 The development version lives at
-L<http://github.com/hanekomu/test-class-getoptcontrol/>.  Instead of sending
-patches, please fork this project using the standard git and github
-infrastructure.
+L<http://github.com/hanekomu/Test-Class-GetoptControl/>.
+Instead of sending patches, please fork this project using the standard git
+and github infrastructure.
 
-=head1 AUTHORS
+=head1 AUTHOR
 
-Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
+  Marcel Gruenauer <marcel@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2009 by Marcel GrE<uuml>nauer
+This software is copyright (c) 2009 by Marcel Gruenauer.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
+

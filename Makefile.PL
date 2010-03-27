@@ -1,42 +1,48 @@
-use inc::Module::Install;
-include 'Module::AutoInstall';
 
-name 'Test-Class-GetoptControl';
-all_from 'lib/Test/Class/GetoptControl.pm';
-readme_from_pod;
-readme_markdown_from_pod;
+use strict;
+use warnings;
 
-auto_set_homepage;
-auto_set_bugtracker;
-auto_set_repository;
+ BEGIN { require 5.008; } 
 
-requires 'Getopt::Inherited';
-requires 'List::Util';
-requires 'Test::Class';
+use ExtUtils::MakeMaker 6.11;
 
-test_requires 'Test::More' => '0.70';
-extra_tests;
 
-author_requires 'ShipIt';
-author_requires 'ShipIt::Step::DistClean';
-author_requires 'ShipIt::Step::DistTestExtra';
-author_requires 'ShipIt::Step::Manifest';
-author_requires 'ShipIt::Step::Twitter';
-author_requires 'Test::Compile';
-author_requires 'Test::Perl::Critic';
-author_requires 'Test::Pod';
-author_requires 'Test::Spelling';
-author_requires 'Pod::Wordlist::hanekomu';
-author_requires 'Test::Pod::Coverage';
-# author_requires 'Test::Kwalitee';
-author_requires 'Test::YAML::Meta';
-author_requires 'Test::Portability::Files';
-author_requires 'Test::Synopsis';
-author_requires 'Test::MinimumVersion';
-author_requires 'Test::HasVersion';
-author_requires 'Test::CheckChanges';
-author_requires 'Test::DistManifest';
 
-auto_install;
-auto_include;
-WriteAll;
+my %WriteMakefileArgs = (
+                       'test' => {
+                                   'TESTS' => 't/*.t'
+                                 },
+                       'NAME' => 'Test::Class::GetoptControl',
+                       'DISTNAME' => 'Test-Class-GetoptControl',
+                       'CONFIGURE_REQUIRES' => {
+                                                 'ExtUtils::MakeMaker' => '6.11'
+                                               },
+                       'AUTHOR' => 'Marcel Gruenauer <marcel@cpan.org>',
+                       'BUILD_REQUIRES' => {},
+                       'ABSTRACT' => 'Command-line control of test class execution',
+                       'EXE_FILES' => [],
+                       'VERSION' => '1.100860',
+                       'PREREQ_PM' => {
+                                        'Scalar::Util' => '0',
+                                        'parent' => '0',
+                                        'English' => '0',
+                                        'Test::Class' => '0',
+                                        'constant' => '0',
+                                        'Getopt::Inherited' => '0',
+                                        'Carp' => '0',
+                                        'List::Util' => '0',
+                                        'Test::More' => '0.88',
+                                        'File::Find' => '0',
+                                        'File::Temp' => '0'
+                                      },
+                       'LICENSE' => 'perl'
+                     );
+
+
+delete $WriteMakefileArgs{LICENSE}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.31) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
